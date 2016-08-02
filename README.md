@@ -3,8 +3,8 @@ Spring boot + JPA DATA sample project with one RestFul controllers.
 
 ##Tech env
   - Java8
-  - Sprint boot
-  - Sprint JPA DATA
+  - Spring boot
+  - Spring JPA DATA
   - H2 memory database
   - REST
 
