@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @EnableAutoConfiguration
 public class SampleController {
-
+	
     @RequestMapping("/")
     public String home() {
         return "index.html";
     }
 	
-	@RequestMapping("/hello")
-	@ResponseBody
+    @RequestMapping("/hello")
+    @ResponseBody
     public String home1() {
         return "hello !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
