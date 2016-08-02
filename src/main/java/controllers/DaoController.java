@@ -29,18 +29,18 @@ public class DaoController {
     }
     
     @RequestMapping("/add")
-	@ResponseBody
-	@Transactional(readOnly = true)
-	public User addUser() {
-    	 User user = new User();
-         user.setName("steve");
-         user.setEmail("steve@gmail.com");
-		return this.userService.create(user);
+    @ResponseBody
+    @Transactional(readOnly = true)
+    public User addUser() {
+	User user = new User();
+	user.setName("steve");
+	user.setEmail("steve@gmail.com");
+	return this.userService.create(user);
     }
     @GetMapping("/all")
-	@ResponseBody
-	@Transactional(readOnly = true)
-	public List<User> getAll() {
-		return this.userService.findAll();
+    @ResponseBody
+    @Transactional(readOnly = true)
+    public List<User> getAll() {
+	return this.userService.findAll();
     }
 }
