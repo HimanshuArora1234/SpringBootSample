@@ -1,5 +1,5 @@
 # SpringBootSample
-Spring boot sample project with on RestFul controller &amp; one controller to return HTML template.
+Spring boot sample project with one RestFul controller &amp; one controller to return HTML template.
 
 #To run
   1. mvn clean install
