@@ -1,5 +1,5 @@
 # SpringBootSample
-Spring boot + JPA DATA sample project with one RestFul controllers.
+Spring boot + JPA DATA sample project with RestFul controllers.
 
 ##Tech env
   - Java8
@@ -9,9 +9,14 @@ Spring boot + JPA DATA sample project with one RestFul controllers.
   - REST
 
 ##To run
-  1. mvn clean install
-  2. mvn spring-boot:run
-  3. Goto http://localhost:8080/   ("/" controller returns the HTML page)
-  4. Goto http://localhost:8080/hello  ("/hello" RESTFul controller)
-  5. Goto http://localhost:8080/add  (RestFUL controller to insert mocked user data in database, call this endpoint as many time as the number of insertions you want)
-  6. Goto http://localhost:8080/all  (RestFUL controller to retrieve all the users from database)
+  1. ```mvn clean install```
+  2. ```mvn spring-boot:run```
+  3. Goto ```http://localhost:8080/```   ("/" controller returns the HTML page)
+  4. Goto ```http://localhost:8080/hello```  ("/hello" RESTFul controller)
+  5. Goto ```http://localhost:8080/add```  (RestFUL controller to insert mocked user data in database, call this endpoint as many time as the number of insertions you want)
+  6. Goto ```http://localhost:8080/all```  (RestFUL controller to retrieve all the users from database)
+  
+##Package app
+  1. ```mvn package``` (with the help of spring boot maven plugin this command prepares a complete JAR of you web app with all the dependencies, ready to run)
+  2. ```java -jar your_packaged_application_jar.jar``` (To run the application. Packaged jar will be available in the target folder of your project as for example ```springBootTest-0.1.0.jar```)
+  3. Goto ```http://localhost:8080/``` to access your running spring boot application.
