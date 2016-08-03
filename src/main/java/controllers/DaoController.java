@@ -30,7 +30,7 @@ public class DaoController {
     
     @RequestMapping("/add")
 	@ResponseBody
-	@Transactional(readOnly = true)
+	@Transactional
 	public User addUser() {
     	 User user = new User();
          user.setName("steve");
@@ -39,7 +39,7 @@ public class DaoController {
     }
     @GetMapping("/all")
 	@ResponseBody
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<User> getAll() {
 		return this.userService.findAll();
     }
