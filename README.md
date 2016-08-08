@@ -1,5 +1,5 @@
 # SpringBootSample
-Spring boot + JPA DATA sample project with RestFul controllers.
+Spring boot + JPA DATA sample project with RestFul controllers. This application's front end uses ReactJS(Fluxx).
 
 ##Tech env
   - Java8
@@ -7,6 +7,9 @@ Spring boot + JPA DATA sample project with RestFul controllers.
   - Spring JPA DATA
   - H2 memory database
   - REST
+  - HTML5
+  - CSS3 (Stylus
+  - ReactJS (Fluxx)
 
 ##To run
   1. ```mvn clean install```
