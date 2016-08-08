@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import {add} from './actions';
-
+import ChartScreen from './ChartScreen';
 export default class UserScreen extends React.Component {
 
   constructor(props) {
@@ -16,6 +16,7 @@ export default class UserScreen extends React.Component {
         <main id="mainContainer">
           {this.renderForm()}
           {this.renderUserList()}
+          <ChartScreen refUsers={this.props.refUsers}/>
         </main>
       </div>
     );
@@ -31,7 +32,7 @@ export default class UserScreen extends React.Component {
           <input type="text" tabIndex="2"
                 onChange={this.onFormValueChangeHelper('email')}
                 value={this.state.currentUser.email} />
-          <button>Save</button>
+          <button>Save data</button>
         </div>
       </form>
     );
