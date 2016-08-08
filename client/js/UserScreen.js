@@ -28,14 +28,21 @@ export default class UserScreen extends React.Component {
         <div>
           <input type="text" tabIndex="1"
               onChange={this.onFormValueChangeHelper('name')}
-              value={this.state.currentUser.name} />
+              value={this.state.currentUser.name}
+              placeholder="Name"/>
           <input type="text" tabIndex="2"
                 onChange={this.onFormValueChangeHelper('email')}
-                value={this.state.currentUser.email} />
+                value={this.state.currentUser.email}
+                placeholder="Email"/>
           <button>Save data</button>
+          <button className="no-print" onClick={this.generatePdf.bind(this)}>PDF</button>
         </div>
       </form>
     );
+  }
+
+  generatePdf() {
+    window.print();
   }
 
   renderUserList() {
