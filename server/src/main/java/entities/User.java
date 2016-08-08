@@ -1,26 +1,30 @@
 package entities;
 
-import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+
+
 
 /**
  * Created by galloisg on 26/07/2016.
  */
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
 
-	private static final long serialVersionUID = 3807860860521706371L;
 
 	@Id
     @GeneratedValue
     private Integer id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "email")
+    @NotNull
     private String email;
 
     public Integer getId() {

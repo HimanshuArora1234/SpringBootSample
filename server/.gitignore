@@ -1,0 +1,14 @@
+*.class
+*.log
+.lib/
+.project
+.classpath
+.settings/*
+target/
+.springBeans
+.idea
+*.iml
+src/main/resources/static/app.js
+src/main/resources/static/.app.js
+src/main/resources/static/app.css
+src/main/resources/static/.app.css

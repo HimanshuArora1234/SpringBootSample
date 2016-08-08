@@ -5,15 +5,21 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import services.UserService;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 @Controller
 public class DaoController {
@@ -31,15 +37,16 @@ public class DaoController {
         return "hello !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
 
-    @RequestMapping(method = RequestMethod.POST, path="/add")
+    @RequestMapping(method = RequestMethod.POST, value="/add", headers = {"Content-type=application/json"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional(readOnly = true)
-    public User addUser() {
-        User user = new User();
-        user.setName("steve");
-        user.setEmail("steve@gmail.com");
-        return this.userService.create(user);
-    }
+    public User addUser(@Valid @RequestBody User user, BindingResult bindingResults) throws Exception {
+    	if (bindingResults.hasErrors()) {
+    		throw new Exception("Input invalid");
+	     } else {
+	    	 return this.userService.create(user);
+	     }
+	}
 
     @ApiOperation(value = "getAll", nickname = "getAll")
     @ApiResponses(value = {
