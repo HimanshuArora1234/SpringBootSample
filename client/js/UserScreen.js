@@ -35,7 +35,7 @@ export default class UserScreen extends React.Component {
                 value={this.state.currentUser.email}
                 placeholder="Email"/>
           <button>Save data</button>
-          <button className="no-print" onClick={this.generatePdf.bind(this)}>PDF</button>
+          <button className="no-print" onClick={this.generatePdf.bind(this)}>Print</button>
         </div>
       </form>
     );
