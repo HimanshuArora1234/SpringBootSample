@@ -1,5 +1,6 @@
 # SpringBootSample
-Spring boot + JPA DATA sample project with RestFul controllers. This application's front end uses ReactJS(Fluxx).
+Spring boot + JPA DATA sample project with RestFul controllers. This application's front end uses ReactJS(Fluxx). <br/>
+It provides stateless session management using a browser cookie.
 
 ##Tech env
   - Java8
