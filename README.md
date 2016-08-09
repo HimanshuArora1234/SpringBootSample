@@ -1,6 +1,6 @@
 # SpringBootSample
 Spring boot + JPA DATA sample project with RestFul controllers. This application's front end uses ReactJS(Fluxx). <br/>
-It provides stateless session management using a browser cookie.
+It provides stateless session management using a browser cookie and AES encryption/decryption.
 
 ##Tech env
   - Java8
@@ -9,7 +9,7 @@ It provides stateless session management using a browser cookie.
   - H2 memory database
   - REST
   - HTML5
-  - CSS3 (Stylus
+  - CSS3 (Stylus)
   - ReactJS (Fluxx)
 
 ##To run
