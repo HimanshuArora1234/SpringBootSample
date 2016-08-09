@@ -14,7 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import static springfox.documentation.builders.PathSelectors.regex;
 
 
 @EnableAutoConfiguration
@@ -23,7 +22,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EntityScan(basePackages = "entities")
 @EnableJpaRepositories(basePackages = "repositories")
 @EnableSwagger2
-@ComponentScan(basePackages = { "services", "controllers" })
+@ComponentScan(basePackages = { "services", "controllers", "Utils" })
 public class Application {
 
     public static void main(String[] args) throws Exception {

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import Utils.SecurityUtility;
 import services.UserService;
 
+import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +34,24 @@ public class DaoController {
     private UserService userService;
     private static String SESSION_COOKIE = "suivi_client_session";
     private static String SESSION_COOKIE_VAL_OK = "OK";
+    @Autowired
+    private SecurityUtility securityUtility;
+    
 
     @RequestMapping(method = RequestMethod.GET, path="/")
     public String home(HttpServletResponse response) {
-    	Cookie sessionCookie = new Cookie(SESSION_COOKIE, SESSION_COOKIE_VAL_OK); //Authenticating user by storing his credentials in a cookie
-    	sessionCookie.setMaxAge(600); //600 secs i.e. 10mins
-    	response.addCookie(sessionCookie);
-        return "index.html";
+    	Cookie sessionCookie;
+		try {
+			String val = securityUtility.encode(SESSION_COOKIE_VAL_OK);
+			sessionCookie = new Cookie(SESSION_COOKIE, URLEncoder.encode(val, "UTF-8")); //Authenticating user by storing his credentials in a cookie
+			sessionCookie.setMaxAge(600); //600 secs i.e. 10mins
+	    	response.addCookie(sessionCookie);
+	        return "index.html";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} 
+    	
     }
 
     @RequestMapping(method = RequestMethod.GET, path="/hello")
@@ -67,7 +82,13 @@ public class DaoController {
     @ResponseBody
     @Transactional(readOnly = true)
     public ResponseEntity<?> getAll(@CookieValue("suivi_client_session") String sessionCookie) {
-    	if (!sessionCookie.equals(SESSION_COOKIE_VAL_OK)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); //Check if user authenticated using session cookie
-        return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
+    	try {
+    		//Check if user authenticated using session cookie
+			if (!securityUtility.decode(sessionCookie).equals(SESSION_COOKIE_VAL_OK)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
+    	} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} 
     }
 }
