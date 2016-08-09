@@ -5,11 +5,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import services.UserService;
 
-import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
 public class DaoController {
     @Autowired
     private UserService userService;
+    private static String SESSION_COOKIE = "suivi_client_session";
+    private static String SESSION_COOKIE_VAL_OK = "OK";
 
     @RequestMapping(method = RequestMethod.GET, path="/")
-    public String home() {
+    public String home(HttpServletResponse response) {
+    	Cookie sessionCookie = new Cookie(SESSION_COOKIE, SESSION_COOKIE_VAL_OK); //Authenticating user by storing his credentials in a cookie
+    	sessionCookie.setMaxAge(600); //600 secs i.e. 10mins
+    	response.addCookie(sessionCookie);
         return "index.html";
     }
 
@@ -58,7 +66,8 @@ public class DaoController {
     @GetMapping("/all")
     @ResponseBody
     @Transactional(readOnly = true)
-    public List<User> getAll() {
-        return this.userService.findAll();
+    public ResponseEntity<?> getAll(@CookieValue("suivi_client_session") String sessionCookie) {
+    	if (!sessionCookie.equals(SESSION_COOKIE_VAL_OK)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); //Check if user authenticated using session cookie
+        return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
     }
 }
