@@ -9,7 +9,7 @@ It provides stateless session management using a browser cookie and AES encrypti
   - H2 memory database
   - REST
   - HTML5
-  - CSS3 (Stylus
+  - CSS3 (Stylus)
   - ReactJS (Fluxx)
 
 ##To run
