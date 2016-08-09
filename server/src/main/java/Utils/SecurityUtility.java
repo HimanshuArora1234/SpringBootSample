@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 public class SecurityUtility {
 	
 	@Value("${application.secretKey}")
-    private String privateKey;
+    private String secretKey;
 	
 	public String encode(String data) throws Exception {
-		SecretKeySpec key = new SecretKeySpec(privateKey.getBytes(), "AES");
+		SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(), "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 	    byte[] encryptedMessage = cipher.doFinal(data.getBytes());
@@ -21,7 +21,7 @@ public class SecurityUtility {
 	}
 	
 	public String decode(String data) throws Exception {
-		SecretKeySpec key = new SecretKeySpec(privateKey.getBytes(), "AES");
+		SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(), "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.DECRYPT_MODE, key);
 	    byte[] decryptedMessage = cipher.doFinal(data.getBytes());
